@@ -5,10 +5,15 @@ import TaskWrapper from "../taskWrapper";
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
+import type { Task } from "../../models/Task.model";
 
 const TasksList = () => {
   type TabType = 'all' | 'done' | 'undone';
   const [value, setValue] = useState<TabType>('all');
+  const tasks: Task[] = [
+    { id: 1, content: 'Acheter du sel', created: new Date().toLocaleDateString() },
+    { id: 1, content: 'Acheter du sel', created: new Date().toLocaleDateString() },
+  ]
 
   const handleChange = (_: React.SyntheticEvent, newValue: TabType) => {
     setValue(newValue);
@@ -41,7 +46,12 @@ const TasksList = () => {
         </Box>
 
         <TabPanel value="all" sx={{ px: 0, py: 2 }}>
-          <TaskWrapper task={{ id: 1, content: 'Acheter du sel', created: new Date().toDateString() }} />
+          { 
+            tasks.map(task => (
+              <TaskWrapper task={task} key={task.id} />
+            )) 
+          }
+          
         </TabPanel>
         <TabPanel value="done" sx={{ px: 0, py: 2 }}>
           Item Two
