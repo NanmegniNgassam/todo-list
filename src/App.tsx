@@ -1,5 +1,6 @@
 import Footer from './components/Footer'
 import Header from './components/Header'
+import Home from './components/home'
 
 function App() {
 
@@ -7,6 +8,7 @@ function App() {
     <div className='container'>
       <Header />
       <div className="mainContainer">
+        <Home />
       </div>
       <Footer />
     </div>
