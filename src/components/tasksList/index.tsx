@@ -1,7 +1,7 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
 import { useState } from "react";
-import TaskWrapper from "../task";
+import TaskWrapper from "../taskWrapper";
 
 const TasksList = () => {
   type TabType = 'all' | 'done' | 'undone';
@@ -22,7 +22,7 @@ const TasksList = () => {
           </TabList>
         </Box>
         <TabPanel value="all" sx={{ px: 0, py: 2 }}>
-          <TaskWrapper task={{ id: 1, content: 'Acheter du sel', created: new Date() }} />
+          <TaskWrapper task={{ id: 1, content: 'Acheter du sel', created: new Date().toDateString() }} />
         </TabPanel>
         <TabPanel value="done">Item Two</TabPanel>
         <TabPanel value="undone">Item Three</TabPanel>
