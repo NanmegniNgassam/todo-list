@@ -2,7 +2,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer>
+    <footer data-testid='footer'>
       <p>
         @Copyrights { currentYear }. All rights reserved to 
         <a target="_blank" href="https://gilles-ngassam.pisoftlite.com/"> Gilles NGASSAM </a>
