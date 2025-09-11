@@ -1,6 +1,6 @@
 const Header = () => {
   return (
-    <header>
+    <header data-testid='headerWrapper'>
       <span>
         Todo-ist
       </span>
