@@ -1,28 +1,24 @@
 import { useState, type FormEvent } from "react";
-import type { Task } from "../../models/Task.model";
+import { connect } from "react-redux";
+import type { Action, Dispatch } from "redux";
 
-const Create = () => {
+const Create = (props : { createTask: (content: string) => void }) => {
   const [content, setContent] = useState<string>('');
+  const { createTask } = props;
 
-  const createTask = (e: FormEvent<HTMLFormElement>) => {
+  const handleTaskSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if(content.length < 3) {
       return;
     }
 
-    const newTask: Task = {
-      id: 1,
-      content: content.trim(),
-      created: new Date().toLocaleDateString(),
-      isDone: false
-    }
-    console.log('Création de nouvelle tâche : ', newTask);
+    createTask(content);
     setContent('');
   } 
 
   return (
-    <form onSubmit={(e) => createTask(e)}>
+    <form onSubmit={(e) => handleTaskSubmit(e)}>
       <input 
         type="text" 
         id="task" 
@@ -34,5 +30,15 @@ const Create = () => {
     </form>
   );
 }
+
+interface CreateTaskAction extends Action {
+  content: string;
+}
+
+const mapDispatchToProps = (dispatch: Dispatch<CreateTaskAction>) => {
+  return {
+    createTask: (content: string) => { dispatch({ type: 'CREATE_TASK', content }) }
+  }
+}
  
-export default Create;
+export default connect(null, mapDispatchToProps)(Create);

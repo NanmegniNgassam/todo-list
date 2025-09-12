@@ -74,5 +74,5 @@ const mapStateToProps = (state: DataBase) => {
     tasks: state.tasks
   }
 }
- 
+
 export default connect(mapStateToProps)(TasksList);
