@@ -2,7 +2,7 @@ import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { Box, Tab } from "@mui/material";
+import { Box, Tab, Typography } from "@mui/material";
 import { useState } from "react";
 import { connect } from "react-redux";
 import type { DataBase } from "../../reducers/taskReducer";
@@ -44,10 +44,18 @@ const TasksList = (props: DataBase) => {
         </Box>
 
         <TabPanel value="all" sx={{ px: 0, py: 2 }}>
-          { 
-            tasks.map(task => (
-              <TaskWrapper task={task} key={task.id} />
-            )) 
+          {
+            tasks ? (
+              tasks.length ? (
+                tasks.map(task => (
+                  <TaskWrapper task={task} key={task.id} />
+                ))
+              ) : (
+                <Typography sx={{ textAlign: 'center' }}>Aucune tâche n'a été trouvée</Typography>
+              )
+            ) : (
+              <p> Loading ... </p>
+            )
           }
         </TabPanel>
         <TabPanel value="done" sx={{ px: 0, py: 2 }}>
