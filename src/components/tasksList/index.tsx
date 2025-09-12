@@ -51,10 +51,18 @@ const TasksList = (props: DataBase) => {
           }
         </TabPanel>
         <TabPanel value="done" sx={{ px: 0, py: 2 }}>
-          Item Two
+          { 
+            tasks.filter(task => task.isDone).map(task => (
+              <TaskWrapper task={task} key={task.id} />
+            )) 
+          }
         </TabPanel>
         <TabPanel value="undone" sx={{ px: 0, py: 2 }}>
-          Item Three
+          { 
+            tasks.filter(task => !task.isDone).map(task => (
+              <TaskWrapper task={task} key={task.id} />
+            )) 
+          }
         </TabPanel>
       </TabContext>
     </Box>
