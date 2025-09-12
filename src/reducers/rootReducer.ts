@@ -16,8 +16,11 @@ const initState: DataBase = {
 interface CreateTaskAction extends Action<"CREATE_TASK"> {
   content: string;
 }
+interface DeleteTaskAction extends Action<"DELETE_TASK"> {
+  id: number;
+}
 
-type TaskActions = CreateTaskAction;
+export type TaskActions = CreateTaskAction | DeleteTaskAction;
 
 export const rootReducer = (state: DataBase = initState, action: TaskActions ) => {
   console.log('Current performed action : ', action);
@@ -37,9 +40,14 @@ export const rootReducer = (state: DataBase = initState, action: TaskActions ) =
         ]
       }
       break;
+
+    case 'DELETE_TASK':
+      return {
+        ...state,
+        tasks: state.tasks.filter(task => task.id !== action.id)
+      }
+      break;
     default:
       return state;
   }
-
-  return state;
 }
