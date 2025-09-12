@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { connect } from "react-redux";
-import type { Action, Dispatch } from "redux";
+import type { Dispatch } from "redux";
+import type { TaskActions } from "../../reducers/taskReducer";
 
 const Create = (props : { createTask: (content: string) => void }) => {
   const [content, setContent] = useState<string>('');
@@ -31,11 +32,7 @@ const Create = (props : { createTask: (content: string) => void }) => {
   );
 }
 
-interface CreateTaskAction extends Action {
-  content: string;
-}
-
-const mapDispatchToProps = (dispatch: Dispatch<CreateTaskAction>) => {
+const mapDispatchToProps = (dispatch: Dispatch<TaskActions>) => {
   return {
     createTask: (content: string) => { dispatch({ type: 'CREATE_TASK', content }) }
   }

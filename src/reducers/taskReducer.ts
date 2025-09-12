@@ -19,12 +19,13 @@ interface CreateTaskAction extends Action<"CREATE_TASK"> {
 interface DeleteTaskAction extends Action<"DELETE_TASK"> {
   id: number;
 }
+interface ToggleTaskStatusAction extends Action<"TOGGLE_TASK_STATUS"> {
+  id: number;
+}
 
-export type TaskActions = CreateTaskAction | DeleteTaskAction;
+export type TaskActions = CreateTaskAction | DeleteTaskAction | ToggleTaskStatusAction;
 
 export const rootReducer = (state: DataBase = initState, action: TaskActions ) => {
-  console.log('Current performed action : ', action);
-
   switch(action.type) {
     case 'CREATE_TASK':
       return {
@@ -47,6 +48,18 @@ export const rootReducer = (state: DataBase = initState, action: TaskActions ) =
         tasks: state.tasks.filter(task => task.id !== action.id)
       }
       break;
+
+    case 'TOGGLE_TASK_STATUS': 
+      return {
+        ...state,
+        tasks: state.tasks.map(task => {
+          if (task.id === action.id)
+            return { ...task, isDone: !task.isDone }
+          else
+            return task
+        })
+      }
+    
     default:
       return state;
   }

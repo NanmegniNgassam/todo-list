@@ -1,26 +1,24 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Checkbox, Paper, Stack, Typography } from "@mui/material";
-import type { Task } from "../../models/Task.model";
-import { useState } from 'react';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
-import type { TaskActions } from '../../reducers/rootReducer';
+import type { Task } from "../../models/Task.model";
+import type { TaskActions } from '../../reducers/taskReducer';
 
-const TaskWrapper = (props: { task: Task, deleteTask: (id: number) => void}) => {
-  const { task, deleteTask } = props;
+interface TaskProps {
+  task: Task, 
+  deleteTask: (id: number) => void, 
+  toggleTaskStatus: (id: number) => void
+}
+
+const TaskWrapper = (props: TaskProps) => {
+  const { task, deleteTask, toggleTaskStatus } = props;
   const { id, content, created, isDone } = task;
-  const [isTaskDone, setTaskDone] = useState<boolean>(isDone);
-
-  const handleTaskDone = () => {
-    setTaskDone(!isTaskDone);
-
-    // Update the store
-  }
 
   return (
     <Paper elevation={4} sx={{ py: 1, px: 1, mb: 3 }}>
       <Stack direction='row' alignItems='center' >
-        <Checkbox checked={isTaskDone} onClick={handleTaskDone} />
+        <Checkbox checked={isDone} onClick={() => toggleTaskStatus(id)} />
         <Stack direction='column' flex={1}>
           <Typography variant='body1' sx={{ fontWeight: 'bold' }} > 
             { content } 
@@ -37,7 +35,8 @@ const TaskWrapper = (props: { task: Task, deleteTask: (id: number) => void}) => 
 
 const mapDispatchToProps = (dispatch: Dispatch<TaskActions>) => {
   return {
-    deleteTask: (id: number) => { dispatch({ type: 'DELETE_TASK', id }) }
+    deleteTask: (id: number) => { dispatch({ type: 'DELETE_TASK', id }) },
+    toggleTaskStatus: (id: number) => { dispatch({ type: 'TOGGLE_TASK_STATUS', id }) }
   }
 }
  

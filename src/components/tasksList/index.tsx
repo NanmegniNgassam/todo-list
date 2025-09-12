@@ -5,7 +5,7 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
 import { useState } from "react";
 import { connect } from "react-redux";
-import type { DataBase } from "../../reducers/rootReducer";
+import type { DataBase } from "../../reducers/taskReducer";
 import TaskWrapper from "../taskWrapper";
 
 const TasksList = (props: DataBase) => {
