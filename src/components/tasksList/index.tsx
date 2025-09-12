@@ -20,7 +20,7 @@ const TasksList = () => {
   };
 
   return (
-    <Box sx={{ width: { xs: '100%', sm: '75%', md: '50%', lg: '40%', xl: '30%' }, typography: 'body1' }}>
+    <Box sx={{ width: { xs: '100%', sm: '75%', md: '50%', xl: '40%' }, typography: 'body1' }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleChange} aria-label="Select a target on tasks you want to see.">

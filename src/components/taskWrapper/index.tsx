@@ -4,11 +4,17 @@ import type { Task } from "../../models/Task.model";
 import { useState } from 'react';
 
 const TaskWrapper = ({ task }: { task: Task}) => {
-  const { content, created, isDone } = task;
+  const { id, content, created, isDone } = task;
   const [isTaskDone, setTaskDone] = useState<boolean>(isDone);
 
   const handleTaskDone = () => {
     setTaskDone(!isTaskDone);
+
+    // Update the store
+  }
+
+  const deleteTask = () => {
+    console.log('Current task deleted successfully : ', id);
 
     // Update the store
   }
@@ -25,10 +31,9 @@ const TaskWrapper = ({ task }: { task: Task}) => {
             { new Date(created).toLocaleDateString().split('/').join('•') } 
           </Typography>
         </Stack>
-        <DeleteIcon sx={{ cursor: 'pointer' }} color='primary' />
+        <DeleteIcon sx={{ cursor: 'pointer' }} color='primary' onClick={deleteTask} />
       </Stack>
     </Paper>
-    
   );
 }
  
