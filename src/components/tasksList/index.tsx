@@ -1,19 +1,17 @@
+import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
+import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
+import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
 import { useState } from "react";
+import { connect } from "react-redux";
+import type { DataBase } from "../../reducers/rootReducer";
 import TaskWrapper from "../taskWrapper";
-import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
-import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
-import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
-import type { Task } from "../../models/Task.model";
 
-const TasksList = () => {
+const TasksList = (props: DataBase) => {
   type TabType = 'all' | 'done' | 'undone';
   const [value, setValue] = useState<TabType>('all');
-  const tasks: Task[] = [
-    { id: 1, content: 'Acheter du sel', created: new Date().toLocaleDateString(), isDone: true },
-    { id: 1, content: 'Acheter du sel', created: new Date().toLocaleDateString(), isDone: false },
-  ]
+  const { tasks } = props 
 
   const handleChange = (_: React.SyntheticEvent, newValue: TabType) => {
     setValue(newValue);
@@ -51,7 +49,6 @@ const TasksList = () => {
               <TaskWrapper task={task} key={task.id} />
             )) 
           }
-          
         </TabPanel>
         <TabPanel value="done" sx={{ px: 0, py: 2 }}>
           Item Two
@@ -63,5 +60,11 @@ const TasksList = () => {
     </Box>
   );
 }
+
+const mapStateToProps = (state: DataBase) => {
+  return {
+    tasks: state.tasks
+  }
+}
  
-export default TasksList;
+export default connect(mapStateToProps)(TasksList);

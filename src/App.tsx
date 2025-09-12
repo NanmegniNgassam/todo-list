@@ -1,17 +1,22 @@
+import { Provider } from 'react-redux'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import Home from './components/home'
+import { store } from './store/store'
 
 function App() {
 
   return (
-    <div className='container'>
-      <Header />
-      <div className="mainContainer">
-        <Home />
+    <Provider store={store}>
+      <div className='container'>
+        <Header />
+        <div className="mainContainer">
+          <Home />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </Provider>
+
   )
 }
 
