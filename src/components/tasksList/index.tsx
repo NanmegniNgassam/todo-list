@@ -7,6 +7,7 @@ import { useState } from "react";
 import { connect } from "react-redux";
 import type { DataBase } from "../../reducers/taskReducer";
 import TaskWrapper from "../taskWrapper";
+import TaskLoader from '../taskLoader';
 
 const TasksList = (props: DataBase) => {
   type TabType = 'all' | 'done' | 'undone';
@@ -60,9 +61,15 @@ const TasksList = (props: DataBase) => {
         </TabPanel>
         <TabPanel value="done" sx={{ px: 0, py: 2 }}>
           { 
-            tasks.filter(task => task.isDone).map(task => (
-              <TaskWrapper task={task} key={task.id} />
-            )) 
+            <div>
+              {
+                tasks.filter(task => task.isDone).map(task => (
+                  <TaskWrapper task={task} key={task.id} />
+                )) 
+              }
+              <TaskLoader />
+            </div>
+            
           }
         </TabPanel>
         <TabPanel value="undone" sx={{ px: 0, py: 2 }}>
