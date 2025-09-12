@@ -11,8 +11,8 @@ const TasksList = () => {
   type TabType = 'all' | 'done' | 'undone';
   const [value, setValue] = useState<TabType>('all');
   const tasks: Task[] = [
-    { id: 1, content: 'Acheter du sel', created: new Date().toLocaleDateString() },
-    { id: 1, content: 'Acheter du sel', created: new Date().toLocaleDateString() },
+    { id: 1, content: 'Acheter du sel', created: new Date().toLocaleDateString(), isDone: true },
+    { id: 1, content: 'Acheter du sel', created: new Date().toLocaleDateString(), isDone: false },
   ]
 
   const handleChange = (_: React.SyntheticEvent, newValue: TabType) => {

@@ -15,6 +15,7 @@ const Create = () => {
       id: 1,
       content: content.trim(),
       created: new Date().toLocaleDateString(),
+      isDone: false
     }
     console.log('Création de nouvelle tâche : ', newTask);
     setContent('');

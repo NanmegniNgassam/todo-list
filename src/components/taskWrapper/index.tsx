@@ -1,14 +1,16 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Checkbox, Paper, Stack, Typography } from "@mui/material";
 import type { Task } from "../../models/Task.model";
+import { useState } from 'react';
 
 const TaskWrapper = ({ task }: { task: Task}) => {
-  const { content, created } = task;
+  const { content, created, isDone } = task;
+  const [isTaskDone, SetTaskDone] = useState<boolean>(isDone);
 
   return (
     <Paper elevation={4} sx={{ py: 1, px: 1, mb: 3 }}>
       <Stack direction='row' alignItems='center' >
-        <Checkbox />
+        <Checkbox checked={isTaskDone} onClick={() => SetTaskDone(!isTaskDone)} />
         <Stack direction='column' flex={1}>
           <Typography variant='body1' sx={{ fontWeight: 'bold' }} > 
             { content } 
