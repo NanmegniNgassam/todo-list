@@ -92,6 +92,13 @@ form input {
   border-radius: 3px 3px 3px 3px;
   border-width: 1px;
 }
+.truncate {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
 
 footer {
   padding: 20px;

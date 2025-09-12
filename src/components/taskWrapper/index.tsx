@@ -16,11 +16,19 @@ const TaskWrapper = (props: TaskProps) => {
   const { id, content, created, isDone } = task;
 
   return (
-    <Paper elevation={4} sx={{ py: 1, px: 1, mb: 3 }}>
+    <Paper elevation={4} sx={{ py: 1, px: 1, mb: 3, overflow: 'hidden', width: '100%' }}>
       <Stack direction='row' alignItems='center' >
         <Checkbox checked={isDone} onClick={() => toggleTaskStatus(id)} />
-        <Stack direction='column' flex={1}>
-          <Typography variant='body1' sx={{ fontWeight: 'bold' }} > 
+        <Stack direction='column' flex={1} overflow='hidden'>
+          <Typography 
+            variant='body1' 
+            sx={{ 
+              fontWeight: 'bold', 
+              whiteSpace: 'nowrap', 
+              overflow: 'hidden', 
+              textOverflow: 'ellipsis', 
+            }}
+          > 
             { content } 
           </Typography>
           <Typography fontSize='small' color='gray'> 
