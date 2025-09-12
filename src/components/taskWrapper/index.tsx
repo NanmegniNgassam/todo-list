@@ -5,12 +5,18 @@ import { useState } from 'react';
 
 const TaskWrapper = ({ task }: { task: Task}) => {
   const { content, created, isDone } = task;
-  const [isTaskDone, SetTaskDone] = useState<boolean>(isDone);
+  const [isTaskDone, setTaskDone] = useState<boolean>(isDone);
+
+  const handleTaskDone = () => {
+    setTaskDone(!isTaskDone);
+
+    // Update the store
+  }
 
   return (
     <Paper elevation={4} sx={{ py: 1, px: 1, mb: 3 }}>
       <Stack direction='row' alignItems='center' >
-        <Checkbox checked={isTaskDone} onClick={() => SetTaskDone(!isTaskDone)} />
+        <Checkbox checked={isTaskDone} onClick={handleTaskDone} />
         <Stack direction='column' flex={1}>
           <Typography variant='body1' sx={{ fontWeight: 'bold' }} > 
             { content } 
