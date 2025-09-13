@@ -4,6 +4,7 @@ import type { Task } from "../models/Task.model";
 export interface DataBase {
   tasks: Task[]
 }
+const taskReducerKey = 'todo-ist-tasks';
 
 const initState: DataBase = {
   tasks: [
@@ -27,8 +28,8 @@ export type TaskActions = CreateTaskAction | DeleteTaskAction | ToggleTaskStatus
 
 export const rootReducer = (state: DataBase = initState, action: TaskActions ) => {
   switch(action.type) {
-    case 'CREATE_TASK':
-      return {
+    case 'CREATE_TASK': {
+      const store = {
         ...state,
         tasks: [
           ...state.tasks, 
@@ -40,17 +41,27 @@ export const rootReducer = (state: DataBase = initState, action: TaskActions ) =
           }
         ]
       }
-      break;
 
-    case 'DELETE_TASK':
-      return {
+      // Save the new store on the storage
+      localStorage.setItem(taskReducerKey, JSON.stringify(store));
+
+      return store
+    }
+
+    case 'DELETE_TASK': {
+      const store = {
         ...state,
         tasks: state.tasks.filter(task => task.id !== action.id)
-      }
-      break;
+      };
 
-    case 'TOGGLE_TASK_STATUS': 
-      return {
+      // Save the new store on the storage
+      localStorage.setItem(taskReducerKey, JSON.stringify(store));
+
+      return store
+    }
+
+    case 'TOGGLE_TASK_STATUS': {
+      const store = {
         ...state,
         tasks: state.tasks.map(task => {
           if (task.id === action.id)
@@ -59,7 +70,13 @@ export const rootReducer = (state: DataBase = initState, action: TaskActions ) =
             return task
         })
       }
-    
+
+      // Save the new store on the storage
+      localStorage.setItem(taskReducerKey, JSON.stringify(store));
+
+      return store;
+    }
+
     default:
       return state;
   }
