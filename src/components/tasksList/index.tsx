@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material";
 import type { Task } from "../../models/Task.model";
 import TaskWrapper from "../taskWrapper";
+import TaskLoader from "../taskLoader";
 
 const tasksList = ({ tasks }: { tasks: Task[] }) => {
   return (
@@ -15,7 +16,11 @@ const tasksList = ({ tasks }: { tasks: Task[] }) => {
             <Typography sx={{ textAlign: 'center' }}>Aucune tâche n'a été trouvée</Typography>
           )
         ) : (
-          <p> Loading ... </p>
+          <>
+            <TaskLoader />
+            <TaskLoader />
+            <TaskLoader />
+          </>
         )
       }
     </div>
