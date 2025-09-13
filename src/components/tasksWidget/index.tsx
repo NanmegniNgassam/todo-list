@@ -2,12 +2,11 @@ import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import PublishedWithChangesIcon from '@mui/icons-material/PublishedWithChanges';
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { Box, Tab, Typography } from "@mui/material";
+import { Box, Tab } from "@mui/material";
 import { useState } from "react";
 import { connect } from "react-redux";
 import type { DataBase } from "../../reducers/taskReducer";
-import TaskWrapper from "../taskWrapper";
-import TaskLoader from '../taskLoader';
+import TasksList from '../tasksList';
 
 const TasksWidget = (props: DataBase) => {
   type TabType = 'all' | 'done' | 'undone';
@@ -45,39 +44,13 @@ const TasksWidget = (props: DataBase) => {
         </Box>
 
         <TabPanel value="all" sx={{ px: 0, py: 2 }}>
-          {
-            tasks ? (
-              tasks.length ? (
-                tasks.map(task => (
-                  <TaskWrapper task={task} key={task.id} />
-                ))
-              ) : (
-                <Typography sx={{ textAlign: 'center' }}>Aucune tâche n'a été trouvée</Typography>
-              )
-            ) : (
-              <p> Loading ... </p>
-            )
-          }
+          <TasksList tasks={tasks} />
         </TabPanel>
         <TabPanel value="done" sx={{ px: 0, py: 2 }}>
-          { 
-            <div>
-              {
-                tasks.filter(task => task.isDone).map(task => (
-                  <TaskWrapper task={task} key={task.id} />
-                )) 
-              }
-              <TaskLoader />
-            </div>
-            
-          }
+          <TasksList tasks={tasks.filter(task => task.isDone)} />
         </TabPanel>
         <TabPanel value="undone" sx={{ px: 0, py: 2 }}>
-          { 
-            tasks.filter(task => !task.isDone).map(task => (
-              <TaskWrapper task={task} key={task.id} />
-            )) 
-          }
+          <TasksList tasks={tasks.filter(task => !task.isDone)} />
         </TabPanel>
       </TabContext>
     </Box>
