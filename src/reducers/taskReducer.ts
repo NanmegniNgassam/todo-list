@@ -6,12 +6,7 @@ export interface DataBase {
 }
 const taskReducerKey = 'todo-ist-tasks';
 
-const initState: DataBase = {
-  tasks: [
-    { id: 1, content: 'Acheter du sel', created: new Date().toLocaleDateString(), isDone: true },
-    { id: 2, content: 'Aller faire mon marathon', created: new Date().toLocaleDateString(), isDone: false },
-  ],
-}
+const initState: DataBase = JSON.parse(localStorage.getItem(taskReducerKey) || JSON.stringify({tasks: []}))
 
 // Types d'actions
 interface CreateTaskAction extends Action<"CREATE_TASK"> {
