@@ -9,7 +9,7 @@ import type { DataBase } from "../../reducers/taskReducer";
 import TaskWrapper from "../taskWrapper";
 import TaskLoader from '../taskLoader';
 
-const TasksList = (props: DataBase) => {
+const TasksWidget = (props: DataBase) => {
   type TabType = 'all' | 'done' | 'undone';
   const [value, setValue] = useState<TabType>('all');
   const { tasks } = props 
@@ -90,4 +90,4 @@ const mapStateToProps = (state: DataBase) => {
   }
 }
 
-export default connect(mapStateToProps)(TasksList);
+export default connect(mapStateToProps)(TasksWidget);
