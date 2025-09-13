@@ -118,3 +118,17 @@ footer p {
     color: #747bff;
   }
 }
+
+@media screen and (max-width: 600px) {
+  form {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+  }
+
+  form input {
+    width: 90%;
+    max-width: 400px;
+  }
+}
