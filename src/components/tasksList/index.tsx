@@ -9,7 +9,9 @@ const tasksList = ({ tasks }: { tasks: Task[] }) => {
       {
         tasks ? (
           tasks.length ? (
-            tasks.map(task => (
+            tasks
+            .sort((taskA, taskB) => new Date(taskB.created).valueOf() - new Date(taskA.created).valueOf())
+            .map(task => (
               <TaskWrapper task={task} key={task.id} />
             ))
           ) : (

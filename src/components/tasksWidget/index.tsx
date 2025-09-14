@@ -5,8 +5,8 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
 import { useState } from "react";
 import { connect } from "react-redux";
-import type { DataBase } from "../../reducers/taskReducer";
 import TasksList from '../tasksList';
+import type { DataBase } from '../../store/reducers/taskReducer';
 
 const TasksWidget = (props: DataBase) => {
   type TabType = 'all' | 'done' | 'undone';
