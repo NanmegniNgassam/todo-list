@@ -3,7 +3,8 @@ import { Checkbox, Paper, Stack, Typography } from "@mui/material";
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { Task } from "../../models/Task.model";
-import type { TaskActions } from '../../reducers/taskReducer';
+import type { TaskActions } from '../../store/reducers/taskReducer';
+import { deleteTask, toggleTaskStatus } from '../../store/actions/taskActions';
 
 interface TaskProps {
   task: Task, 
@@ -43,8 +44,8 @@ const TaskWrapper = (props: TaskProps) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<TaskActions>) => {
   return {
-    deleteTask: (id: number) => { dispatch({ type: 'DELETE_TASK', id }) },
-    toggleTaskStatus: (id: number) => { dispatch({ type: 'TOGGLE_TASK_STATUS', id }) }
+    deleteTask: (id: number) => { dispatch(deleteTask(id)) },
+    toggleTaskStatus: (id: number) => { dispatch(toggleTaskStatus(id)) }
   }
 }
  

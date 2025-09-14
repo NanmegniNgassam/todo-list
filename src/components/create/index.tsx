@@ -1,7 +1,8 @@
 import { useState, type FormEvent } from "react";
 import { connect } from "react-redux";
 import type { Dispatch } from "redux";
-import type { TaskActions } from "../../reducers/taskReducer";
+import type { TaskActions } from "../../store/reducers/taskReducer";
+import { createTask } from "../../store/actions/taskActions";
 
 const Create = (props : { createTask: (content: string) => void }) => {
   const [content, setContent] = useState<string>('');
@@ -27,14 +28,16 @@ const Create = (props : { createTask: (content: string) => void }) => {
         placeholder="Entrer une nouvelle tâche"
         onChange={(event) => setContent(event.target.value)} 
       />
-      <button type="submit" disabled={content.length < 3}>Créer une tâche</button>
+      <button type="submit" disabled={content.length < 3}>
+        Créer une tâche
+      </button>
     </form>
   );
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<TaskActions>) => {
   return {
-    createTask: (content: string) => { dispatch({ type: 'CREATE_TASK', content }) }
+    createTask: (content: string) => { dispatch(createTask(content)) }
   }
 }
  
