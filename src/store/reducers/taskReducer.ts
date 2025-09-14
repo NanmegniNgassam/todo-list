@@ -1,5 +1,5 @@
 import type { Action } from "redux";
-import type { Task } from "../models/Task.model";
+import type { Task } from "../../models/Task.model";
 
 export interface DataBase {
   tasks: Task[]
@@ -21,7 +21,7 @@ interface ToggleTaskStatusAction extends Action<"TOGGLE_TASK_STATUS"> {
 
 export type TaskActions = CreateTaskAction | DeleteTaskAction | ToggleTaskStatusAction;
 
-export const rootReducer = (state: DataBase = initState, action: TaskActions ) => {
+export const taskReducer = (state: DataBase = initState, action: TaskActions ) => {
   switch(action.type) {
     case 'CREATE_TASK': {
       const store = {
