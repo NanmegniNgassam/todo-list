@@ -63,6 +63,10 @@ header span {
   font-size: 2rem;
 }
 
+.MuiTab-root {
+  padding: 10px!important;
+}
+
 form {
   display: flex;
   gap: 20px;
@@ -130,5 +134,6 @@ footer p {
   form input {
     width: 90%;
     max-width: 400px;
+    height: 40px;
   }
 }
