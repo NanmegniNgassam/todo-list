@@ -7,14 +7,14 @@ export const createTask = (content: string): TaskActions => {
   }
 }
 
-export const deleteTask = (id: number): TaskActions => {
+export const deleteTask = (id: string): TaskActions => {
   return {
     type: 'DELETE_TASK',
     id
   }
 }
 
-export const toggleTaskStatus = (id: number): TaskActions => {
+export const toggleTaskStatus = (id: string): TaskActions => {
   return {
     type: 'TOGGLE_TASK_STATUS',
     id

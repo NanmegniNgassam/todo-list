@@ -1,5 +1,6 @@
 import type { Action } from "redux";
 import type { Task } from "../../models/Task.model";
+import { v4 as uuidv4 } from 'uuid';
 
 export interface DataBase {
   tasks: Task[]
@@ -13,10 +14,10 @@ interface CreateTaskAction extends Action<"CREATE_TASK"> {
   content: string;
 }
 interface DeleteTaskAction extends Action<"DELETE_TASK"> {
-  id: number;
+  id: string;
 }
 interface ToggleTaskStatusAction extends Action<"TOGGLE_TASK_STATUS"> {
-  id: number;
+  id: string;
 }
 
 export type TaskActions = CreateTaskAction | DeleteTaskAction | ToggleTaskStatusAction;
@@ -24,23 +25,30 @@ export type TaskActions = CreateTaskAction | DeleteTaskAction | ToggleTaskStatus
 export const taskReducer = (state: DataBase = initState, action: TaskActions ) => {
   switch(action.type) {
     case 'CREATE_TASK': {
+      let id = uuidv4();
+      const ids = state.tasks.map(task => task.id);
+
+      while (ids.includes(id)) {
+        id = uuidv4();
+      }
+
       const store = {
         ...state,
         tasks: [
           ...state.tasks, 
           { 
-            id: state.tasks.length + 1,
+            id,
             content: action.content,
             created: new Date().toISOString(),
             isDone: false 
           }
         ]
-      }
+      };
 
       // Save the new store on the storage
       localStorage.setItem(taskReducerKey, JSON.stringify(store));
 
-      return store
+      return store;
     }
 
     case 'DELETE_TASK': {
