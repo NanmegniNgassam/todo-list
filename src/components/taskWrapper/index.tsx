@@ -8,8 +8,8 @@ import { deleteTask, toggleTaskStatus } from '../../store/actions/taskActions';
 
 interface TaskProps {
   task: Task, 
-  deleteTask: (id: number) => void, 
-  toggleTaskStatus: (id: number) => void
+  deleteTask: (id: string) => void, 
+  toggleTaskStatus: (id: string) => void
 }
 
 const TaskWrapper = (props: TaskProps) => {
@@ -17,7 +17,7 @@ const TaskWrapper = (props: TaskProps) => {
   const { id, content, created, isDone } = task;
 
   return (
-    <Paper elevation={4} sx={{ py: 1, px: 1, mb: 3, overflow: 'hidden', width: '100%' }}>
+    <Paper elevation={4} sx={{ py: 1, px: 1, mb: 3, overflow: 'hidden', width: '100%' }} data-testid='task-wrapper'>
       <Stack direction='row' alignItems='center' >
         <Checkbox checked={isDone} onClick={() => toggleTaskStatus(id)} />
         <Stack direction='column' flex={1} overflow='hidden'>
@@ -44,8 +44,8 @@ const TaskWrapper = (props: TaskProps) => {
 
 const mapDispatchToProps = (dispatch: Dispatch<TaskActions>) => {
   return {
-    deleteTask: (id: number) => { dispatch(deleteTask(id)) },
-    toggleTaskStatus: (id: number) => { dispatch(toggleTaskStatus(id)) }
+    deleteTask: (id: string) => { dispatch(deleteTask(id)) },
+    toggleTaskStatus: (id: string) => { dispatch(toggleTaskStatus(id)) }
   }
 }
  
